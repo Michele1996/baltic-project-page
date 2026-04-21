@@ -1,88 +1,139 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BALTIC Dataset</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALTIC Dataset</title>
 
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-      margin: 0;
-      background: #f4f6f9;
-      color: #222;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    header {
-      background: linear-gradient(135deg, #0b3d91, #1e5fd8);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #f6f8fc;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
 
-    header h1 { font-size: 2.5em; margin: 0; }
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0b3d91, #1e5fd8);
+  color: white;
+  padding: 70px 20px;
+  text-align: center;
+}
 
-    header p {
-      max-width: 800px;
-      margin: 15px auto;
-      font-size: 1.2em;
-    }
+header h1 {
+  font-size: 2.8em;
+  margin-bottom: 10px;
+}
 
-    .links a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 18px;
-      background: white;
-      color: #0b3d91;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+header p {
+  max-width: 800px;
+  margin: 10px auto 20px;
+  font-size: 1.2em;
+  opacity: 0.95;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px;
-      background: white;
-    }
+/* BUTTONS */
+.links a {
+  display: inline-block;
+  margin: 8px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  background: white;
+  color: #0b3d91;
+  transition: all 0.2s ease;
+}
 
-    h2 {
-      margin-top: 40px;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 5px;
-    }
+.links a:hover {
+  transform: translateY(-2px);
+  background: #eef3ff;
+}
 
-    .teaser img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: -40px auto 40px;
+  padding: 30px;
+}
 
-    pre {
-      background: #eee;
-      padding: 15px;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
+/* CARD SECTIONS */
+.section {
+  background: white;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.05);
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
+h2 {
+  margin-top: 0;
+  font-size: 1.6em;
+  border-left: 4px solid #2d6cdf;
+  padding-left: 10px;
+}
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+/* TEASER */
+.teaser img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #777;
-    }
-  </style>
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  background: #eef3ff;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+/* CODE BLOCKS */
+pre {
+  background: #111;
+  color: #eee;
+  padding: 15px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.dataset-box {
+  background: #eef3ff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+</style>
 
 </head>
 
@@ -105,106 +156,137 @@
 
 <div class="container">
 
-  <div class="teaser">
+  <!-- TEASER -->
+  <div class="section teaser">
     <img src="teaser4.png">
-    <p><b>Cross-domain reconstruction:</b> underwater + in-air views improve robustness.</p>
+    <p><b>Cross-domain reconstruction:</b> underwater + in-air views significantly improve robustness and completeness.</p>
   </div>
 
-  <h2>Overview</h2>
-  <p>
-    BALTIC is a controlled benchmark for evaluating 3D reconstruction methods 
-    across air and underwater environments under varying illumination.
-    It enables systematic analysis of scattering, absorption, and domain shifts.
-  </p>
+  <!-- OVERVIEW -->
+  <div class="section">
+    <h2>Overview</h2>
+    <p>
+      BALTIC is a controlled benchmark for evaluating 3D reconstruction methods 
+      across air and underwater environments under varying illumination. 
+      It enables systematic analysis of scattering, absorption, and domain shifts.
+    </p>
+  </div>
 
-  <h2>Quick Start (Reproducibility)</h2>
-  <pre>
+  <!-- QUICK START -->
+  <div class="section">
+    <h2>Quick Start (Reproducibility)</h2>
+    <pre>
 git clone https://github.com/yourname/baltic.git
 cd baltic
 pip install -r requirements.txt
 
-python demo.py </pre>
+python demo.py
+    </pre>
+  </div>
 
-  <h2>Dataset</h2>
+  <!-- DATASET -->
+  <div class="section">
+    <h2>Dataset</h2>
 
-  <table>
-    <tr><th>Dataset</th><th>Description</th></tr>
-    <tr><td>E1–E7</td><td>Air (directional, mixed, artificial lighting)</td></tr>
-    <tr><td>E8–E13</td><td>Underwater (scattering + lighting variations)</td></tr>
-    <tr><td>E14</td><td>Cross-domain (E12 + selected E6 images)</td></tr>
-  </table>
+    <div class="grid">
+      <div class="dataset-box">E1–E3<br>Air / Sunlight</div>
+      <div class="dataset-box">E4–E5<br>Air / Mixed</div>
+      <div class="dataset-box">E6–E7<br>Air / Artificial</div>
+      <div class="dataset-box">E8–E9<br>Water / Sunlight</div>
+      <div class="dataset-box">E10–E11<br>Water / Mixed</div>
+      <div class="dataset-box">E12–E13<br>Water / Artificial</div>
+      <div class="dataset-box">E14<br>Cross-domain</div>
+    </div>
 
-  <p><b>Total size:</b> XXX GB</p>
+    <p><b>Total size:</b> XXX GB</p>
+  </div>
 
-  <h2>Data Structure</h2>
-  <pre>
+  <!-- STRUCTURE -->
+  <div class="section">
+    <h2>Data Structure</h2>
+    <pre>
 BALTIC/
  ├── E1/
  │    ├── images/
  │    ├── poses.txt
  │    ├── intrinsics.json
  │    └── depth/
-  </pre>
+    </pre>
+  </div>
 
-  <h2>Download</h2>
+  <!-- DOWNLOAD -->
+  <div class="section">
+    <h2>Download</h2>
 
-  <p><b>Mini dataset (recommended first):</b></p>
-  <a href="#">Download (~5GB)</a>
+    <p><b>Mini dataset (recommended first):</b></p>
+    <a href="#">Download (~5GB)</a>
 
-  <p><b>Full dataset:</b></p>
-  <pre>
+    <p><b>Full dataset:</b></p>
+    <pre>
 bash download_full.sh
-  </pre>
+    </pre>
 
-  <p>
-    Note: Full dataset may require >XXX GB storage.
-  </p>
+    <p>Note: Full dataset may require >XXX GB storage.</p>
+  </div>
 
-  <h2>Devkit</h2>
+  <!-- DEVKIT -->
+  <div class="section">
+    <h2>Devkit</h2>
 
-  <pre>
+    <pre>
 from baltic import load_sequence
 
 data = load_sequence("E1")
 print(data.images.shape)
-  </pre>
+    </pre>
 
-  <p>
-    The devkit includes loaders, calibration parsing, and scripts to reproduce
-    benchmark results from the paper.
-  </p>
+    <p>
+      Includes loaders, calibration parsing, and scripts to reproduce results.
+    </p>
+  </div>
 
-  <h2>Benchmark Protocol</h2>
-  <ul>
-    <li>Tasks: 3D reconstruction, cross-domain generalization</li>
-    <li>Metrics: PSNR, SSIM, LPIPS, Chamfer Distance</li>
-    <li>Evaluation: train/test splits across domains</li>
-  </ul>
+  <!-- BENCHMARK -->
+  <div class="section">
+    <h2>Benchmark Protocol</h2>
+    <ul>
+      <li>Tasks: 3D reconstruction, cross-domain generalization</li>
+      <li>Metrics: PSNR, SSIM, LPIPS, Chamfer Distance</li>
+      <li>Evaluation: train/test splits across domains</li>
+    </ul>
+  </div>
 
-  <h2>Example Results</h2>
-  <p>Add figures (e.g., reconstructions, tables) from the paper here.</p>
+  <!-- RESULTS -->
+  <div class="section">
+    <h2>Example Results</h2>
+    <p>Add reconstruction figures (e.g., recs.png, cross3.png) here.</p>
+  </div>
 
-  <h2>Reproducibility</h2>
-  <p>
-    All experiments reported in the paper can be reproduced using the provided
-    scripts and dataset. A minimal working example is included in the mini dataset.
-  </p>
+  <!-- REPRO -->
+  <div class="section">
+    <h2>Reproducibility</h2>
+    <p>
+      All experiments can be reproduced using the provided scripts and dataset.
+    </p>
+  </div>
 
-  <h2>Citation</h2>
-  <pre>
+  <!-- CITATION -->
+  <div class="section">
+    <h2>Citation</h2>
+    <pre>
 @article{baltic2026,
   title={BALTIC: A Benchmark for 3D Reconstruction Across Air and Underwater Domains},
   author={Grimaldi et al.},
   journal={IJRR},
   year={2026}
 }
-  </pre>
+    </pre>
+  </div>
 
-  <h2>License</h2>
-  <p>Academic use only. Contact authors for commercial licensing.</p>
-
-  <h2>Contact</h2>
-  <p>Michele Grimaldi – your.email@example.com</p>
+  <!-- CONTACT -->
+  <div class="section">
+    <h2>Contact</h2>
+    <p>Michele Grimaldi – your.email@example.com</p>
+  </div>
 
 </div>
 
