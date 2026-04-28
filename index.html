@@ -247,20 +247,44 @@ BALTIC/
     </pre>
   </div>
 
-  <!-- DOWNLOAD -->
-  <div class="section">
-    <h2>Download</h2>
+<!-- DOWNLOAD -->
+<div class="section">
+  <h2>Download</h2>
 
-    <p><b>Mini dataset (recommended first):</b></p>
-    <a href="#">Download (~5GB)</a>
+  <p><b>Download dataset using Python:</b></p>
 
-    <p><b>Full dataset:</b></p>
-    <pre>
-bash download_full.sh
-    </pre>
+  <pre>
+pip install huggingface_hub
 
-    <p>Note: Full dataset may require >XXX GB storage.</p>
-  </div>
+python - <<EOF
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Michele1996/BALTIC",
+    repo_type="dataset",
+    local_dir="BALTIC",
+    local_dir_use_symlinks=False
+)
+EOF
+  </pre>
+
+  <p>
+    This will download the full dataset (E1–E13) locally while preserving
+    the original folder structure.
+  </p>
+
+  <p>
+    Alternatively, you can browse or download files manually from:
+  </p>
+
+  <p>
+    <a href="https://huggingface.co/datasets/Michele1996/BALTIC" target="_blank">
+      👉 Hugging Face Dataset Page
+    </a>
+  </p>
+
+  <p><b>Storage note:</b> The full dataset may require significant disk space (>XXX GB).</p>
+</div>
 
   <!-- DEVKIT -->
   <div class="section">
