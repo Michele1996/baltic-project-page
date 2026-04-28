@@ -251,7 +251,13 @@ BALTIC/
 <div class="section">
   <h2>Download</h2>
 
-  <p><b>Download dataset using Python:</b></p>
+  <p>
+    The full BALTIC dataset (E1–E13) is hosted on 
+    <a href="https://huggingface.co/datasets/Michele1996/BALTIC/tree/main" target="_blank">
+      Hugging Face
+    </a>. 
+    We recommend downloading it programmatically to ensure reproducibility.
+  </p>
 
   <pre>
 pip install huggingface_hub
@@ -268,22 +274,21 @@ snapshot_download(
 EOF
   </pre>
 
-  <p>
-    This will download the full dataset (E1–E13) locally while preserving
-    the original folder structure.
+  <p class="caption">
+    This command downloads the complete dataset while preserving the original
+    directory structure for all sequences.
   </p>
 
-  <p>
-    Alternatively, you can browse or download files manually from:
-  </p>
-
-  <p>
-    <a href="https://huggingface.co/datasets/Michele1996/BALTIC/tree/main" target="_blank">
-      👉 Hugging Face Dataset Page
+  <div style="text-align:center; margin-top:20px;">
+    <a href="https://huggingface.co/datasets/Michele1996/BALTIC" target="_blank"
+       style="display:inline-block; padding:12px 20px; background:#2d6cdf; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
+       📦 Browse Dataset
     </a>
-  </p>
+  </div>
 
-  <p><b>Storage note:</b> The full dataset may require significant disk space (>XXX GB).</p>
+  <p style="margin-top:20px; font-size:0.9em; color:#666;">
+    ⚠️ The full dataset may require substantial storage (>XXX GB).
+  </p>
 </div>
 
   <!-- DEVKIT -->
