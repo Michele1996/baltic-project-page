@@ -291,21 +291,42 @@ EOF
   </p>
 </div>
 
-  <!-- DEVKIT -->
-  <div class="section">
-    <h2>Devkit</h2>
+<!-- DEVKIT -->
+<div class="section">
+  <h2>Devkit</h2>
 
-    <pre>
-from baltic import load_sequence
+  <p>
+    We provide a lightweight evaluation toolkit for assessing reconstruction quality
+    and trajectory accuracy on the BALTIC dataset. The devkit operates on COLMAP
+    outputs and ground-truth poses, enabling consistent and reproducible evaluation
+    across all sequences.
+  </p>
 
-data = load_sequence("E1")
-print(data.images.shape)
-    </pre>
+  <pre>
+git clone https://github.com/Michele1996/baltic-project-page.git
+cd baltic-project-page
 
-    <p>
-      Includes loaders, calibration parsing, and scripts to reproduce results.
-    </p>
+# Run reconstruction externally (e.g., COLMAP)
+
+# Geometry evaluation
+python chamfer.py
+
+# Trajectory alignment and metrics
+python alignment.py
+  </pre>
+
+  <p class="caption">
+    The toolkit computes geometric metrics (Chamfer Distance, surface roughness,
+    nearest-neighbor spacing) and trajectory metrics (ATE, RPE) after Umeyama alignment.
+  </p>
+
+  <div style="text-align:center; margin-top:15px;">
+    <a href="https://github.com/Michele1996/baltic-project-page" target="_blank"
+       style="display:inline-block; padding:10px 18px; background:#000; color:white; border-radius:8px; text-decoration:none; font-weight:600;">
+       💻 View Code & Evaluation
+    </a>
   </div>
+</div>
 
   <!-- BENCHMARK -->
   <div class="section">
