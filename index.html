@@ -1,12 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALTIC Dataset</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #f6f8fc;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #0b3d91, #1e5fd8);
+  color: white;
+  padding: 70px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.8em;
+  margin-bottom: 10px;
+}
+
+header p {
+  max-width: 800px;
+  margin: 10px auto 20px;
+  font-size: 1.2em;
+  opacity: 0.95;
+}
+
+.links a img {
+  margin: 6px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: -40px auto 40px;
+  padding: 30px;
+}
+
+.section {
+  background: white;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.05);
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 1.6em;
+  border-left: 4px solid #2d6cdf;
+  padding-left: 10px;
+}
+
+pre {
+  background: #111;
+  color: #eee;
+  padding: 15px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.dataset-box {
+  background: #eef3ff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-container img {
+  width: 100%;
+  max-width: 950px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.caption {
+  max-width: 950px;
+  font-size: 0.95em;
+  color: #555;
+  margin-top: 10px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>BALTIC</h1>
+  <p>
+    A Benchmark for 3D Reconstruction Across Air and Underwater Domains
+    Under Varying Illumination
+  </p>
+
+  <div class="links">
+    <a href="https://arxiv.org/abs/2604.19133" target="_blank">
+      <img src="https://img.shields.io/badge/Paper-arXiv-red?style=for-the-badge">
+    </a>
+    <a href="https://github.com/Michele1996/baltic-project-page" target="_blank">
+      <img src="https://img.shields.io/badge/Code-GitHub-black?style=for-the-badge">
+    </a>
+    <a href="https://huggingface.co/datasets/Michele1996/BALTIC" target="_blank">
+      <img src="https://img.shields.io/badge/Dataset-HuggingFace-yellow?style=for-the-badge">
+    </a>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- TEASER -->
+<div class="section">
+  <div class="img-container">
+    <img src="teaser5.png">
+    <p class="caption">
+      Cross-domain reconstruction under air and underwater conditions.
+    </p>
+  </div>
+</div>
+
 <!-- OVERVIEW -->
 <div class="section">
   <h2>Overview</h2>
-
   <p>
-    BALTIC is a benchmark for evaluating 3D reconstruction methods under strong
-    domain shifts between air and underwater environments with varying illumination.
-    The dataset enables systematic analysis of how scattering, absorption, and
-    lighting degradation affect reconstruction quality and trajectory accuracy.
+    BALTIC is a benchmark designed to evaluate 3D reconstruction methods
+    under strong domain shifts between air and underwater environments.
+    The dataset enables systematic analysis of illumination changes,
+    scattering, and absorption effects on geometry and pose estimation.
   </p>
 </div>
 
@@ -15,9 +161,7 @@
   <h2>Dataset</h2>
 
   <p>
-    The dataset consists of 13 multi-view sequences (E1–E13) captured across
-    different environments and lighting conditions, along with synchronized
-    ground-truth tracking data.
+    The dataset consists of 13 sequences captured under different environmental conditions.
   </p>
 
   <div class="grid">
@@ -29,35 +173,32 @@
     <div class="dataset-box">E12–E13<br>Water / Artificial</div>
   </div>
 
-  <p><b>Download:</b></p>
-  <a href="https://huggingface.co/datasets/Michele1996/BALTIC" target="_blank">
-    👉 Hugging Face Dataset
-  </a>
-
-  <p style="margin-top:10px; font-size:0.9em; color:#666;">
-    Total size: ~56 GB
-  </p>
+  <p style="margin-top:15px;"><b>Total size:</b> ~56 GB</p>
 </div>
 
-<!-- PIPELINE -->
+<!-- DOWNLOAD -->
 <div class="section">
-  <h2>Pipeline</h2>
+  <h2>Download</h2>
 
   <p>
-    The benchmark follows a standardized reconstruction-to-evaluation pipeline:
+    The dataset is hosted on Hugging Face and can be downloaded programmatically:
   </p>
 
-  <ol>
-    <li>Capture multi-view images for each sequence (E1–E13)</li>
-    <li>Run COLMAP to recover camera poses and sparse 3D structure</li>
-    <li>Extract reconstructed trajectories (<code>E*_xyz_q.txt</code>)</li>
-    <li>Load ground-truth tracking data (<code>E*_tf.txt</code>)</li>
-    <li>Align trajectories using similarity transform (Umeyama)</li>
-    <li>Evaluate geometry and trajectory accuracy using the devkit</li>
-  </ol>
+  <pre>
+pip install huggingface_hub
+
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="Michele1996/BALTIC",
+    repo_type="dataset",
+    local_dir="BALTIC",
+    local_dir_use_symlinks=False
+)
+  </pre>
 
   <p class="caption">
-    This ensures consistent and reproducible evaluation across all methods.
+    Preserves full directory structure (E1–E13).
   </p>
 </div>
 
@@ -66,52 +207,43 @@
   <h2>Devkit</h2>
 
   <p>
-    We provide a lightweight evaluation toolkit for geometry and trajectory benchmarking.
-    It operates directly on COLMAP reconstructions and ground-truth trajectories.
+    We provide a lightweight evaluation toolkit for reproducible benchmarking.
   </p>
 
   <pre>
 git clone https://github.com/Michele1996/baltic-project-page.git
 cd baltic-project-page
 
-python chamfer.py      # geometry metrics
-python alignment.py    # trajectory metrics (ATE, RPE)
+python chamfer.py
+python alignment.py
   </pre>
 
-  <h3>Data format</h3>
-
-  <p><b>Reconstruction:</b> <code>E*_xyz_q.txt</code></p>
-  <pre>qw qx qy qz x y z</pre>
-
-  <p><b>Ground truth:</b> <code>E*_tf.txt</code></p>
-  <pre>timestamp | Translation + Rotation</pre>
-
   <p class="caption">
-    The devkit computes Chamfer Distance, surface roughness, and trajectory metrics
-    (ATE, RPE) after Umeyama alignment.
+    Computes geometry metrics (Chamfer, roughness) and trajectory metrics (ATE, RPE)
+    after Umeyama alignment between COLMAP and ground-truth trajectories.
   </p>
-
-  <div style="text-align:center; margin-top:15px;">
-    <a href="https://github.com/Michele1996/baltic-project-page" target="_blank"
-       style="display:inline-block; padding:10px 18px; background:#000; color:white; border-radius:8px;">
-      💻 Code & Evaluation
-    </a>
-  </div>
-</div>
-
-<!-- BENCHMARK -->
-<div class="section">
-  <h2>Benchmark</h2>
-
-  <ul>
-    <li><b>Task:</b> Multi-view 3D reconstruction</li>
-    <li><b>Goal:</b> Robustness under air–water domain shift</li>
-    <li><b>Metrics:</b> Chamfer Distance, Surface Roughness, ATE, RPE</li>
-  </ul>
 
   <p>
-    All methods are evaluated using identical reconstruction and alignment procedures.
+    Trajectory formats:
   </p>
+
+  <pre>
+E*_xyz_q.txt   (COLMAP reconstruction)
+E*_tf.txt      (ground-truth tracking)
+  </pre>
+</div>
+
+<!-- PIPELINE -->
+<div class="section">
+  <h2>Evaluation Pipeline</h2>
+
+  <ol>
+    <li>Download dataset</li>
+    <li>Run COLMAP reconstruction</li>
+    <li>Extract trajectories</li>
+    <li>Align using Umeyama</li>
+    <li>Compute metrics using devkit</li>
+  </ol>
 </div>
 
 <!-- RESULTS -->
@@ -121,8 +253,7 @@ python alignment.py    # trajectory metrics (ATE, RPE)
   <div class="img-container">
     <img src="recs.png">
     <p class="caption">
-      COLMAP reconstructions across domains. Underwater scenes exhibit reduced
-      density and fragmentation due to scattering and absorption.
+      COLMAP reconstructions under air vs underwater conditions.
     </p>
   </div>
 </div>
@@ -130,14 +261,35 @@ python alignment.py    # trajectory metrics (ATE, RPE)
 <!-- REPRODUCIBILITY -->
 <div class="section">
   <h2>Reproducibility</h2>
-
-  <ul>
-    <li>Run COLMAP per sequence (E1–E13)</li>
-    <li>Run geometry evaluation (chamfer.py)</li>
-    <li>Run trajectory evaluation (alignment.py)</li>
-  </ul>
-
   <p>
-    All results in the paper can be reproduced using the provided dataset and devkit.
+    All results are fully reproducible using the dataset and devkit.
   </p>
 </div>
+
+<!-- CITATION -->
+<div class="section">
+  <h2>Citation</h2>
+  <pre>
+@misc{grimaldi2026baltic,
+  title={BALTIC: A Benchmark for 3D Reconstruction Across Air and Underwater Domains},
+  author={Michele Grimaldi et al.},
+  year={2026},
+  url={https://arxiv.org/abs/2604.19133}
+}
+  </pre>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact</h2>
+  <p>Michele Grimaldi – michelegrmld@gmail.com</p>
+</div>
+
+</div>
+
+<footer>
+  © 2026 BALTIC Project
+</footer>
+
+</body>
+</html>
