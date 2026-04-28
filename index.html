@@ -296,29 +296,73 @@ EOF
   <h2>Devkit</h2>
 
   <p>
-    We provide a lightweight evaluation toolkit for assessing reconstruction quality
+    We provide a lightweight evaluation toolkit for assessing 3D reconstruction quality
     and trajectory accuracy on the BALTIC dataset. The devkit operates on COLMAP
-    outputs and ground-truth poses, enabling consistent and reproducible evaluation
-    across all sequences.
+    reconstructions and ground-truth tracking data, enabling consistent and reproducible
+    evaluation across all sequences.
   </p>
 
   <pre>
 git clone https://github.com/Michele1996/baltic-project-page.git
 cd baltic-project-page
 
-# Run reconstruction externally (e.g., COLMAP)
+# 1. Run COLMAP reconstruction externally (not included)
 
-# Geometry evaluation
+# 2. Geometry evaluation (Chamfer, roughness, NN spacing)
 python chamfer.py
 
-# Trajectory alignment and metrics
+# 3. Trajectory alignment + metrics (ATE, RPE)
 python alignment.py
   </pre>
 
   <p class="caption">
-    The toolkit computes geometric metrics (Chamfer Distance, surface roughness,
-    nearest-neighbor spacing) and trajectory metrics (ATE, RPE) after Umeyama alignment.
+    The evaluation pipeline computes geometric metrics (Chamfer Distance,
+    surface roughness, nearest-neighbor spacing) and trajectory metrics
+    (Absolute Trajectory Error, Relative Pose Error) after Umeyama alignment.
   </p>
+
+  <h3 style="margin-top:20px;">Data Format</h3>
+
+  <p>
+    Each sequence contains reconstructed and ground-truth trajectories stored as text files.
+  </p>
+
+  <ul>
+    <li><b>E*_xyz_q.txt</b> — reconstructed trajectory from COLMAP</li>
+    <li><b>E*_tf.txt</b> — ground-truth trajectory from tracking system</li>
+  </ul>
+
+  <p><b>Reconstructed trajectory format:</b></p>
+
+  <pre>
+qw qx qy qz x y z
+  </pre>
+
+  <p class="caption">
+    Quaternion (qw, qx, qy, qz) represents camera orientation, and (x, y, z)
+    represents camera position in 3D space.
+  </p>
+
+  <p><b>Ground-truth trajectory format:</b></p>
+
+  <pre>
+timestamp frame | Translation: x=..., y=..., z=... | Rotation: x=..., y=..., z=..., w=...
+  </pre>
+
+  <p class="caption">
+    Each entry contains a timestamped rigid transformation. Only the translation
+    component is used for trajectory evaluation, while rotation is provided for completeness.
+  </p>
+
+  <h3 style="margin-top:20px;">Evaluation Procedure</h3>
+
+  <ol>
+    <li>Load reconstructed COLMAP trajectory (<code>E*_xyz_q.txt</code>)</li>
+    <li>Load ground-truth trajectory (<code>E*_tf.txt</code>)</li>
+    <li>Align trajectories using similarity transform (Umeyama)</li>
+    <li>Compute ATE and RPE metrics</li>
+    <li>Evaluate geometric quality from COLMAP point clouds</li>
+  </ol>
 
   <div style="text-align:center; margin-top:15px;">
     <a href="https://github.com/Michele1996/baltic-project-page" target="_blank"
@@ -327,40 +371,65 @@ python alignment.py
     </a>
   </div>
 </div>
+</div>
 
-  <!-- BENCHMARK -->
-  <div class="section">
-    <h2>Benchmark Protocol</h2>
-    <ul>
-      <li>Tasks: 3D reconstruction, cross-domain generalization</li>
-      <li>Metrics: PSNR, SSIM, LPIPS, Chamfer Distance</li>
-      <li>Evaluation: train/test splits across domains</li>
-    </ul>
-  </div>
+<!-- BENCHMARK -->
+<div class="section">
+  <h2>Benchmark Protocol</h2>
+
+  <p>
+    BALTIC is designed to evaluate the robustness of 3D reconstruction methods
+    under strong domain shifts between air and underwater environments.
+  </p>
+
+  <ul>
+    <li><b>Task:</b> Structure-from-Motion / Multi-view 3D reconstruction</li>
+    <li><b>Domains:</b> Air, underwater, and mixed illumination conditions</li>
+    <li><b>Evaluation focus:</b> Geometry quality and trajectory consistency</li>
+  </ul>
+
+  <p>
+    All methods are evaluated using a common COLMAP-based reconstruction pipeline
+    followed by geometric and trajectory analysis.
+  </p>
+</div>
+
 
 <!-- RESULTS -->
 <div class="section">
-  <h2>Reconstruction Results</h2>
+  <h2>Qualitative Results</h2>
 
   <div class="img-container">
     <img src="recs.png" alt="Reconstruction Results">
     <p class="caption">
-      Representative COLMAP reconstructions across air and underwater datasets.
-      In-air sequences remain dense and globally consistent, while underwater
-      reconstructions become sparse and fragmented due to scattering and
-      absorption effects.
+      Example COLMAP reconstructions across air and underwater conditions.
+      Air sequences produce dense and globally consistent point clouds,
+      while underwater scenes exhibit reduced density and fragmentation due
+      to scattering and absorption effects.
     </p>
   </div>
-
 </div>
 
-  <!-- REPRO -->
-  <div class="section">
-    <h2>Reproducibility</h2>
-    <p>
-      All experiments can be reproduced using the provided scripts and dataset.
-    </p>
-  </div>
+
+<!-- REPRODUCIBILITY -->
+<div class="section">
+  <h2>Reproducibility</h2>
+
+  <p>
+    All results can be reproduced using standard COLMAP reconstruction followed
+    by the provided evaluation toolkit.
+  </p>
+
+  <ul>
+    <li>Run COLMAP on each sequence (E1–E13)</li>
+    <li>Compute geometry metrics using <code>chamfer.py</code></li>
+    <li>Compute trajectory metrics using <code>alignment.py</code></li>
+  </ul>
+
+  <p>
+    The full dataset and evaluation scripts are publicly available for reproducibility.
+  </p>
+</div>
 
   <!-- CITATION -->
   <div class="section">
