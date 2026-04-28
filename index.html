@@ -195,16 +195,34 @@ footer {
     <p><b>Cross-domain reconstruction:</b> underwater + in-air views significantly improve robustness and completeness.</p>
   </div>
 
-  <!-- OVERVIEW -->
-  <div class="section">
-    <h2>Overview</h2>
-    <p>
-      BALTIC is a controlled benchmark for evaluating 3D reconstruction methods 
-      across air and underwater environments under varying illumination. 
-      It enables systematic analysis of scattering, absorption, and domain shifts.
-    </p>
-  </div>
+<!-- OVERVIEW -->
+<div class="section">
+  <h2>Overview</h2>
 
+  <p>
+    BALTIC is a controlled benchmark for evaluating 3D reconstruction methods
+    across air and underwater environments under varying illumination. It is
+    designed to study how domain shifts such as scattering, absorption, and
+    lighting degradation affect reconstruction quality and trajectory accuracy.
+  </p>
+
+  <p>
+    The benchmark follows a standard reconstruction-to-evaluation pipeline:
+  </p>
+
+  <ol>
+    <li>Acquire multi-view images for each sequence (E1–E13)</li>
+    <li>Run COLMAP to recover camera poses and sparse 3D structure</li>
+    <li>Extract reconstructed trajectories and point clouds (<code>E*_xyz_q.txt</code>)</li>
+    <li>Load ground-truth tracking data (<code>E*_tf.txt</code>)</li>
+    <li>Align reconstructed and ground-truth trajectories using a similarity transform (Umeyama)</li>
+    <li>Evaluate geometry and trajectory accuracy using the provided devkit</li>
+  </ol>
+
+  <p class="caption">
+    This unified pipeline ensures consistent and reproducible evaluation across all sequences and methods.
+  </p>
+</div>
 
   <!-- DATASET -->
   <div class="section">
